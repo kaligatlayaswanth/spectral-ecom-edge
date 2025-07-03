@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { CartItems } from "@/components/CartItems";
@@ -32,7 +31,7 @@ const Cart = () => {
     }
   ]);
 
-  const updateQuantity = (id: number, newQuantity: number) => {
+  const updateQuantity = (id, newQuantity) => {
     if (newQuantity === 0) {
       removeItem(id);
       return;
@@ -44,7 +43,7 @@ const Cart = () => {
     );
   };
 
-  const removeItem = (id: number) => {
+  const removeItem = (id) => {
     setCartItems(items => items.filter(item => item.id !== id));
   };
 

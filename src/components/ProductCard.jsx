@@ -1,17 +1,4 @@
-
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  image: string;
-  badge: string;
-}
-
-interface ProductCardProps {
-  product: Product;
-}
-
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product }) => {
   return (
     <div className="group relative bg-gradient-to-b from-neutral-900 to-black rounded-lg overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
       {/* Badge */}

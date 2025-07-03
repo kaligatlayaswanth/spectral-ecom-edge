@@ -1,27 +1,10 @@
-
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  specifications: Record<string, string>;
-  reviews: Array<{
-    name: string;
-    rating: number;
-    comment: string;
-  }>;
-}
-
-interface ProductTabsProps {
-  product: Product;
-}
-
-export const ProductTabs = ({ product }: ProductTabsProps) => {
+export const ProductTabs = ({ product }) => {
   const [activeTab, setActiveTab] = useState("description");
 
-  const renderStars = (rating: number) => {
+  const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
       <span
         key={i}

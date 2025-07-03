@@ -1,23 +1,7 @@
-
 import { X, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
-
-interface CartItemsProps {
-  items: CartItem[];
-  onUpdateQuantity: (id: number, quantity: number) => void;
-  onRemoveItem: (id: number) => void;
-  onClearCart: () => void;
-}
-
-export const CartItems = ({ items, onUpdateQuantity, onRemoveItem, onClearCart }: CartItemsProps) => {
+export const CartItems = ({ items, onUpdateQuantity, onRemoveItem, onClearCart }) => {
   return (
     <div className="space-y-6">
       {/* Action Buttons */}
