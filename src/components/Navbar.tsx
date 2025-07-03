@@ -1,8 +1,10 @@
 
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,27 +26,35 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold font-poppins text-white">
-            ElectroLux
+            <a href="/">ElectroLux</a>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
             <a
-              href="#home"
-              className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
+              href="/"
+              className={`transition-colors duration-200 font-medium ${
+                location.pathname === "/" 
+                  ? "text-white" 
+                  : "text-white/80 hover:text-white"
+              }`}
             >
               Home
+            </a>
+            <a
+              href="/shop"
+              className={`transition-colors duration-200 font-medium ${
+                location.pathname === "/shop" 
+                  ? "text-white" 
+                  : "text-white/80 hover:text-white"
+              }`}
+            >
+              Shop
             </a>
             <a
               href="#categories"
               className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
             >
               Categories
-            </a>
-            <a
-              href="#products"
-              className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
-            >
-              Products
             </a>
             <a
               href="#contact"
