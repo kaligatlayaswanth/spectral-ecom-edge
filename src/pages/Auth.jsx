@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Eye, EyeOff, ArrowLeft, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,11 +19,11 @@ const Auth = () => {
     acceptTerms: false,
   });
 
-  const handleInputChange = (field: string, value: string | boolean) => {
+  const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     // Handle authentication logic here

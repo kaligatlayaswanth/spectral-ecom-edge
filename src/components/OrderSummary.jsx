@@ -1,15 +1,7 @@
-
 import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface OrderSummaryProps {
-  subtotal: number;
-  shipping: number;
-  tax: number;
-  total: number;
-}
-
-export const OrderSummary = ({ subtotal, shipping, tax, total }: OrderSummaryProps) => {
+export const OrderSummary = ({ subtotal, shipping, tax, total }) => {
   return (
     <div className="sticky top-24">
       <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 animate-fade-in">

@@ -1,27 +1,12 @@
-
 import { useState } from "react";
 import { Heart, ZoomIn, Minus, Plus } from "lucide-react";
 
-interface Product {
-  id: string;
-  name: string;
-  price: string;
-  originalPrice?: string;
-  description: string;
-  image: string;
-  badge?: string;
-}
-
-interface ProductShowcaseProps {
-  product: Product;
-}
-
-export const ProductShowcase = ({ product }: ProductShowcaseProps) => {
+export const ProductShowcase = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
 
-  const handleQuantityChange = (change: number) => {
+  const handleQuantityChange = (change) => {
     setQuantity(prev => Math.max(1, prev + change));
   };
 
