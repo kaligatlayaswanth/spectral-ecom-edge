@@ -1,73 +1,56 @@
-# Welcome to your S-IoT project
+# S-IoT: Smart IoT E-Commerce Platform
 
-## Project info
+## Project Overview
 
-**URL**: https://s-iot.dev/projects/a30378b7-5daf-441b-862a-c8f23b540509
+S-IoT is a modern e-commerce platform for discovering and purchasing the latest smart IoT devices and components. The site features a premium, smart-themed UI with animated network backgrounds, a glowing neon accent palette, and a built-in smart chatbot assistant to help users find the perfect products.
 
-## How can I edit this code?
+**Live URL:** _[Add your deployed site URL here]_  
 
-There are several ways of editing your application.
+## Key Features
+- **Smart, Futuristic Theme:** Animated IoT-inspired backgrounds, neon blue/cyan accents, and glassmorphism for a high-tech look.
+- **Hero Section with Product Marquee:** Eye-catching, infinite-scrolling product showcase.
+- **Categories & Features:** Explore curated IoT categories and platform benefits.
+- **Testimonials & Newsletter:** Build trust and grow your audience.
+- **Premium Footer:** Modern, information-rich footer with smart theme.
+- **Smart Chatbot:** Attractive, glowing chatbot icon at the bottom right. Click to open a branded S-IoT SmartBot popup (more features coming soon).
+- **Fully Responsive:** Works beautifully on all devices.
 
-**Use S-IoT**
-
-Simply visit the [S-IoT Project](https://s-iot.dev/projects/a30378b7-5daf-441b-862a-c8f23b540509) and start prompting.
-
-Changes made via S-IoT will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in S-IoT.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
+## Tech Stack
+- React (JavaScript)
 - Vite
-- TypeScript
-- React
-- shadcn-ui
 - Tailwind CSS
+- shadcn-ui
+- lucide-react (icons)
+- [lovable-tagger] (for Vite config only)
 
-## How can I deploy this project?
+## Local Development
 
-Simply open [S-IoT](https://s-iot.dev/projects/a30378b7-5daf-441b-862a-c8f23b540509) and click on Share -> Publish.
+1. **Clone the repository:**
+   ```sh
+   git clone <YOUR_GIT_URL>
+   cd <YOUR_PROJECT_NAME>
+   ```
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+3. **Start the development server:**
+   ```sh
+   npm run dev
+   ```
+   The site will be available at [http://localhost:8080](http://localhost:8080) by default.
 
-## Can I connect a custom domain to my S-IoT project?
+## Chatbot Feature
+- The S-IoT SmartBot icon appears at the bottom right of every page.
+- A white label encourages users to interact.
+- Clicking the icon opens a stylish chat popup (placeholder for now).
 
-Yes, you can!
+## Deployment
+You can deploy this site to any static hosting provider (Vercel, Netlify, etc.) or your own server. 
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Custom Domain
+To use a custom domain, configure your DNS and hosting provider as needed.
 
-Read more here: [Setting up a custom domain](https://docs.s-iot.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
+
+_This project is open for further enhancements, including a fully functional chatbot, product search, and more smart features!_
