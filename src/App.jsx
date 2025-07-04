@@ -9,6 +9,7 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import SmartChatbotIcon from "./components/SmartChatbotIcon";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <SmartChatbotIcon />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
