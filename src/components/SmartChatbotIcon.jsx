@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // Unique smart chatbot icon SVG (robot with neon/circuit theme)
 const ChatbotSVG = () => (
@@ -24,8 +24,66 @@ const ChatbotSVG = () => (
   </svg>
 );
 
+const WEBHOOK_URL = "https://gajala.app.n8n.cloud/webhook/product-chat";
+
 const SmartChatbotIcon = () => {
   const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    { from: "bot", text: "Hi! I'm your smart assistant. How can I help you with IoT products today?" }
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
+  const handleSend = async () => {
+    if (!input.trim()) return;
+    const userMessage = { from: "user", text: input };
+    setMessages((msgs) => [...msgs, userMessage]);
+    setInput("");
+    setLoading(true);
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: input })
+      });
+      let botText;
+      if (!res.ok) {
+        botText = `❌ Error: Server responded with status ${res.status}`;
+      } else {
+        const text = await res.text();
+        if (text) {
+          try {
+            const data = JSON.parse(text);
+            botText = data?.output || "❌ No response from server.";
+          } catch {
+            botText = text;
+          }
+        } else {
+          botText = "❌ No response from server.";
+        }
+      }
+      setMessages((msgs) => [...msgs, { from: "bot", text: botText }]);
+    } catch (err) {
+      setMessages((msgs) => [...msgs, { from: "bot", text: `❌ Error: ${err.message || err}` }]);
+    }
+    setLoading(false);
+  };
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter" && !loading) {
+      handleSend();
+    }
+  };
+
   return (
     <>
       {/* Call-to-action label above the icon */}
@@ -44,25 +102,43 @@ const SmartChatbotIcon = () => {
           <ChatbotSVG />
         </span>
       </button>
-      {/* Placeholder chat popup */}
+      {/* Chat popup */}
       {open && (
-        <div className="fixed bottom-24 right-6 w-80 max-w-[90vw] bg-black/90 border border-cyan-400 rounded-2xl shadow-2xl p-6 z-50 animate-fade-in">
+        <div className="fixed bottom-24 right-6 w-80 max-w-[90vw] bg-black/90 border border-cyan-400 rounded-2xl shadow-2xl p-6 z-50 animate-fade-in flex flex-col h-[32rem]">
           <div className="flex items-center mb-4">
             <ChatbotSVG />
             <span className="ml-3 text-cyan-300 font-bold text-lg">S-IoT SmartBot</span>
             <button className="ml-auto text-cyan-400 hover:text-white" onClick={() => setOpen(false)}>&#10005;</button>
           </div>
-          <div className="text-gray-200 text-sm mb-2">Hi! I'm your smart assistant. How can I help you with IoT products today?</div>
-          <input
-            className="w-full mt-2 px-4 py-2 rounded-lg bg-cyan-900/30 border border-cyan-400 text-white placeholder-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-            placeholder="Type your message..."
-            disabled
-          />
-          <div className="text-xs text-cyan-400 mt-2">(Chat coming soon)</div>
+          <div className="flex-1 overflow-y-auto mb-2 bg-black/30 rounded p-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {messages.map((msg, i) => (
+              <div key={i} className={`mb-2 flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
+                <div className={`px-4 py-2 rounded-lg max-w-[80%] text-sm ${msg.from === "user" ? "bg-cyan-600 text-white" : "bg-cyan-900/60 text-cyan-100"}`}>
+                  {msg.text}
+                </div>
+              </div>
+            ))}
+            {loading && (
+              <div className="mb-2 flex justify-start">
+                <div className="px-4 py-2 rounded-lg bg-cyan-900/60 text-cyan-100 text-sm opacity-70">Thinking...</div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+          <div className="mt-4 flex justify-center">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleInputKeyDown}
+              placeholder="Type your message..."
+              className="w-full p-2 rounded-lg bg-cyan-900/60 text-cyan-100 border border-cyan-400 focus:outline-none focus:border-cyan-600"
+            />
+          </div>
         </div>
       )}
     </>
   );
 };
 
-export default SmartChatbotIcon; 
+export default SmartChatbotIcon;
