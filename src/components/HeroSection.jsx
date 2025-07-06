@@ -50,9 +50,9 @@ export const HeroSection = () => {
       className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black text-white overflow-hidden pt-20 pb-32"
       style={{ minHeight: '110vh' }}
     >
-      {/* Carousel at the top */}
+      {/* Carousel at the top - Full width */}
       <div className="relative w-full flex flex-col items-center justify-center pt-8">
-        <div className="relative w-full max-w-7xl mx-auto">
+        <div className="relative w-full">
           <Carousel setApi={handleSetApi} opts={{ loop: true }}>
             <CarouselContent>
               {images.map((img, idx) => (
@@ -60,7 +60,7 @@ export const HeroSection = () => {
                   <img
                     src={img}
                     alt={`Slide ${idx + 1}`}
-                    className="w-full h-[38vw] min-h-[300px] max-h-[520px] object-cover rounded-2xl shadow-xl select-none pointer-events-none mx-auto"
+                    className="w-full h-[60vh] min-h-[400px] max-h-[600px] object-cover select-none pointer-events-none"
                     draggable={false}
                   />
                 </CarouselItem>
@@ -68,7 +68,7 @@ export const HeroSection = () => {
             </CarouselContent>
             {/* Custom arrows overlayed, not circular */}
             <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white px-4 py-2 rounded transition-all"
+              className="absolute left-8 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white px-4 py-2 rounded transition-all"
               onClick={() => carouselApi.current && carouselApi.current.scrollPrev()}
               aria-label="Previous slide"
               style={{outline: 'none'}}
@@ -76,7 +76,7 @@ export const HeroSection = () => {
               <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             </button>
             <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white px-4 py-2 rounded transition-all"
+              className="absolute right-8 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white px-4 py-2 rounded transition-all"
               onClick={() => carouselApi.current && carouselApi.current.scrollNext()}
               aria-label="Next slide"
               style={{outline: 'none'}}
