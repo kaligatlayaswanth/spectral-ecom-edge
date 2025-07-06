@@ -10,6 +10,12 @@ import Cart from "./pages/Cart";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import SmartChatbotIcon from "./components/SmartChatbotIcon";
+import Products from "./pages/Products";
+import Solutions from "./pages/Solutions";
+import SuccessStories from "./pages/SuccessStories";
+import Company from "./pages/Company";
+import Resources from "./pages/Resources";
+import SolutionDetails from "./pages/SolutionDetails";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +28,12 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solution-details/:solution" element={<SolutionDetails />} />
+          <Route path="/success-stories" element={<SuccessStories />} />
+          <Route path="/company" element={<Company />} />
+          <Route path="/resources" element={<Resources />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/auth" element={<Auth />} />

@@ -1,35 +1,33 @@
 export const ProductCard = ({ product }) => {
   return (
-    <div className="group relative bg-gradient-to-b from-neutral-900 to-black rounded-lg overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+    <div className="group relative bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 shadow-lg hover:shadow-white/30 transition-all duration-500 hover:scale-105 hover:border-white/40 h-[520px] w-full flex flex-col">
       {/* Badge */}
       {product.badge && (
-        <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-white/10 backdrop-blur-sm text-white text-xs font-medium rounded-full border border-white/20">
+        <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-white/80 text-black text-xs font-semibold rounded-full shadow-lg border border-white/40 tracking-wide">
           {product.badge}
         </div>
       )}
 
       {/* Product Image */}
-      <div className="aspect-square bg-gradient-to-br from-white/5 to-transparent p-8 flex items-center justify-center">
+      <div className="flex items-center justify-center bg-gradient-to-br from-white/10 to-black/10 h-72 p-8">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
+          className="w-full h-full object-contain drop-shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:drop-shadow-2xl"
         />
       </div>
 
       {/* Product Info */}
-      <div className="p-6 space-y-4">
-        <h3 className="text-lg font-bold font-poppins text-white group-hover:text-gray-200 transition-colors duration-300">
+      <div className="p-6 space-y-4 flex flex-col justify-end flex-1">
+        <h3 className="text-xl font-bold font-poppins text-white group-hover:text-gray-200 transition-colors duration-300 truncate">
           {product.name}
         </h3>
-        
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-white">
+          <span className="text-2xl font-bold text-white drop-shadow">
             {product.price}
           </span>
         </div>
-
-        <button className="w-full group/btn px-6 py-3 border-2 border-white/30 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 font-medium backdrop-blur-sm bg-white/5 hover:scale-105 transform">
+        <button className="w-full group/btn px-6 py-3 border-2 border-white/30 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 font-medium backdrop-blur-sm bg-white/5 hover:scale-105 transform shadow hover:shadow-white/30 mt-auto">
           <span className="flex items-center justify-center gap-2">
             Add to Cart
             <svg
