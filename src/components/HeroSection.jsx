@@ -9,9 +9,9 @@ import { useEffect, useRef, useState } from "react";
 import { HeroProductsMarquee } from "./HeroProductsMarquee";
 
 const images = [
-  "/dreamina-2025-07-06-3249-generate some pics of solar bench whre p....jpeg",
-  "/dreamina-2025-07-06-8208-generate some pics of ssecuritie cameras....jpeg",
-  "/dreamina-2025-07-06-9824-generate some pics of solar bench whre p....jpeg",
+  "/assests/dreamina-2025-07-06-3249-generate some pics of solar bench whre p....jpeg",
+  "/assests/dreamina-2025-07-06-8208-generate some pics of ssecuritie cameras....jpeg",
+  "/assests/dreamina-2025-07-06-1094-generate some pics of solar bench whre p....jpeg",
 ];
 
 export const HeroSection = () => {
@@ -55,12 +55,14 @@ export const HeroSection = () => {
             <CarouselContent>
               {images.map((img, idx) => (
                 <CarouselItem key={img}>
-                  <img
-                    src={img}
-                    alt={`Slide ${idx + 1}`}
-                    className="w-full h-[60vh] min-h-[400px] max-h-[600px] object-cover select-none pointer-events-none"
-                    draggable={false}
-                  />
+                  <div className="flex justify-center items-center w-full h-[70vh] min-h-[500px] max-h-[700px]">
+                    <img
+                      src={img}
+                      alt={`Slide ${idx + 1}`}
+                      className="w-full h-full object-contain select-none pointer-events-none"
+                      draggable={false}
+                    />
+      </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
