@@ -39,20 +39,19 @@ export const Navbar = () => {
       label: "Company",
       href: "/company",
       flyout: [
-        { label: "About Us", href: "#" },
-        { label: "Our brands", href: "#" },
-        { label: "Impact Awards", href: "#" },
-        { label: "SuccessStories", href: "#" },
+        { label: "About Us", href: "/company#about-us" },
+        { label: "Our brands", href: "/company#our-brands" },
+        { label: "Impact Awards", href: "/company#impact-awards" },
       ],
     },
     {
       label: "Resources",
       href: "/resources",
       flyout: [
-        { label: "Blog", href: "#" },
-        { label: "Help Center", href: "#" },
-        { label: "Newsletter", href: "#" },
-        { label: "Documentation", href: "#" },
+        { label: "Blog", href: "/resources#blog" },
+        { label: "Help Center", href: "/resources#help-center" },
+        { label: "Newsletter", href: "/resources#newsletter" },
+        { label: "Documentation", href: "/resources#documentation" },
       ],
     },
   ];
@@ -220,28 +219,61 @@ const FlyoutLink = ({ children, href, open, setOpen, label, FlyoutContent }) => 
   );
 };
 
-const FlyoutContentList = ({ items }) => (
-  <div className="w-64 bg-white p-6 shadow-xl">
-    <div className="space-y-2">
-      {items.map((item) => (
-        item.href.startsWith("/") ? (
-          <Link
-            key={item.label}
-            to={item.href}
-            className="block text-sm hover:underline text-neutral-900 py-1"
-          >
-            {item.label}
-          </Link>
-        ) : (
-          <a
-            key={item.label}
-            href={item.href}
-            className="block text-sm hover:underline text-neutral-900 py-1"
-          >
-            {item.label}
-          </a>
-        )
-      ))}
+const FlyoutContentList = ({ items }) => {
+  const handleLinkClick = (e, href) => {
+    if (href.includes('#')) {
+      const currentPath = window.location.pathname;
+      const targetPath = href.split('#')[0];
+      
+      if (currentPath === targetPath) {
+        // Already on the page, just scroll to section
+        e.preventDefault();
+        const hash = href.split('#')[1];
+        const element = document.querySelector(`#${hash}`);
+        if (element) {
+          const navbarHeight = 80;
+          const elementPosition = element.offsetTop - navbarHeight;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+  };
+
+  return (
+    <div className="w-64 bg-white p-6 shadow-xl">
+      <div className="space-y-2">
+        {items.map((item) => (
+          item.href.includes("#") ? (
+            <Link
+              key={item.label}
+              to={item.href}
+              onClick={(e) => handleLinkClick(e, item.href)}
+              className="block text-sm hover:underline text-neutral-900 py-1"
+            >
+              {item.label}
+            </Link>
+          ) : item.href.startsWith("/") ? (
+            <Link
+              key={item.label}
+              to={item.href}
+              className="block text-sm hover:underline text-neutral-900 py-1"
+            >
+              {item.label}
+            </Link>
+          ) : (
+            <a
+              key={item.label}
+              href={item.href}
+              className="block text-sm hover:underline text-neutral-900 py-1"
+            >
+              {item.label}
+            </a>
+          )
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
