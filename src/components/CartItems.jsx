@@ -41,7 +41,7 @@ export const CartItems = ({ items, onUpdateQuantity, onRemoveItem, onClearCart }
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-20 h-20 md:w-24 md:h-24 object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-300"
+                  className="w-20 h-20 md:w-24 md:h-24 object-cover rounded-xl transition-all duration-300"
                 />
               </div>
 

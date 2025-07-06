@@ -63,7 +63,7 @@ export const ProductsSection = () => {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                    className="w-full h-64 object-cover transition-all duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>

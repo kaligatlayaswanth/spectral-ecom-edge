@@ -1,6 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 export const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
-    <div className="group relative bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 shadow-lg hover:shadow-white/30 transition-all duration-500 hover:scale-105 hover:border-white/40 h-[520px] w-full flex flex-col">
+    <div 
+      className="group relative bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 shadow-lg hover:shadow-white/30 transition-all duration-500 hover:scale-105 hover:border-white/40 h-[520px] w-full flex flex-col cursor-pointer"
+      onClick={handleProductClick}
+    >
       {/* Badge */}
       {product.badge && (
         <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-white/80 text-black text-xs font-semibold rounded-full shadow-lg border border-white/40 tracking-wide">
@@ -27,7 +38,14 @@ export const ProductCard = ({ product }) => {
             {product.price}
           </span>
         </div>
-        <button className="w-full group/btn px-6 py-3 border-2 border-white/30 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 font-medium backdrop-blur-sm bg-white/5 hover:scale-105 transform shadow hover:shadow-white/30 mt-auto">
+        <button 
+          className="w-full group/btn px-6 py-3 border-2 border-white/30 text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 font-medium backdrop-blur-sm bg-white/5 hover:scale-105 transform shadow hover:shadow-white/30 mt-auto"
+          onClick={(e) => {
+            e.stopPropagation();
+            // Add to cart functionality here
+            console.log(`Added ${product.name} to cart`);
+          }}
+        >
           <span className="flex items-center justify-center gap-2">
             Add to Cart
             <svg

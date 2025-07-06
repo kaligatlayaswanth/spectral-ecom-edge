@@ -60,8 +60,10 @@ export const Navbar = () => {
     <nav className="navbar fixed top-0 left-0 right-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="logo text-2xl font-bold font-poppins text-white">
-          <Link to="/">S-IoT</Link>
+        <div className="logo flex items-center">
+          <Link to="/" className="flex items-center">
+            <img src="/logo.png" alt="SIOT Logo" className="h-10 w-auto" />
+          </Link>
         </div>
         {/* Hamburger for mobile */}
         <div className="md:hidden flex items-center">

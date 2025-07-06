@@ -1,7 +1,13 @@
 import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 export const OrderSummary = ({ subtotal, shipping, tax, total }) => {
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
   return (
     <div className="sticky top-24">
       <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 animate-fade-in">
@@ -47,7 +53,10 @@ export const OrderSummary = ({ subtotal, shipping, tax, total }) => {
         </div>
 
         {/* Checkout Button */}
-        <Button className="w-full bg-transparent border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 py-4 text-lg font-medium group">
+        <Button 
+          onClick={handleCheckout}
+          className="w-full bg-transparent border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 py-4 text-lg font-medium group"
+        >
           <Lock className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" />
           Proceed to Checkout
         </Button>

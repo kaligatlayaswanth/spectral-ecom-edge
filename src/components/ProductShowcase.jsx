@@ -32,7 +32,7 @@ export const ProductShowcase = ({ product }) => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-contain filter grayscale transition-all duration-500"
+                  className="w-full h-full object-contain transition-all duration-500"
                 />
                 
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

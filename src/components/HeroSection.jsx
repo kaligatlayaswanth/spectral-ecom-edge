@@ -9,11 +9,9 @@ import { useEffect, useRef, useState } from "react";
 import { HeroProductsMarquee } from "./HeroProductsMarquee";
 
 const images = [
-  "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80",
+  "/dreamina-2025-07-06-3249-generate some pics of solar bench whre p....jpeg",
+  "/dreamina-2025-07-06-8208-generate some pics of ssecuritie cameras....jpeg",
+  "/dreamina-2025-07-06-9824-generate some pics of solar bench whre p....jpeg",
 ];
 
 export const HeroSection = () => {
