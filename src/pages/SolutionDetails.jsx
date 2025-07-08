@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import {
@@ -8,38 +8,72 @@ import {
   useTransform,
 } from "framer-motion";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
-import { useRef } from "react";
 import { useParams } from "react-router-dom";
 
 const SECTION_HEIGHT = 1500;
 
 const SolutionDetails = () => {
   const { solution } = useParams();
-  const solutionTitle = solution
-    ? solution.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
-    : "Solution";
+  const id = solution;
+  const [solutionData, setSolutionData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/success-stories/${id}/`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch solution details");
+        return res.json();
+      })
+      .then((data) => {
+        setSolutionData(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) return <div className="text-white text-center py-10">Loading solution details...</div>;
+  if (error) return <div className="text-red-500 text-center py-10">{error}</div>;
+  if (!solutionData) return null;
+
+  // Prepare image URLs
+  const images = [solutionData.image_1, solutionData.image_2, solutionData.image_3, solutionData.image_4, solutionData.image_5]
+    .filter(Boolean)
+    .map(img => img && !img.startsWith("http") ? `http://127.0.0.1:8000${img}` : img);
+
+  // Fallbacks for parallax if not enough images
+  const fallback = "https://images.unsplash.com/photo-1460186136353-977e9d6085a1?q=80&w=2670&auto=format&fit=crop";
+  const getImg = (idx) => images[idx] || fallback;
+
   return (
     <>
       <Navbar />
       <div className="bg-zinc-950">
-        <Hero solutionTitle={solutionTitle} />
-        <Schedule />
+        <Hero solutionTitle={solutionData.title} images={images} />
+        <div className="max-w-4xl mx-auto px-4 pb-16">
+          <div className="bg-white/10 rounded-xl p-8 shadow-lg text-white text-lg leading-relaxed text-center max-w-2xl mx-auto mt-8">
+            {solutionData.description}
+          </div>
+        </div>
       </div>
       <Footer />
     </>
   );
 };
 
-const Hero = ({ solutionTitle }) => {
+const Hero = ({ solutionTitle, images }) => {
   return (
     <div
       style={{ height: `calc(${SECTION_HEIGHT}px + 100vh)` }}
       className="relative w-full"
     >
-      <CenterImage />
+      <CenterImage img={images[0]} />
       <div className="relative z-10">
         <div className="h-screen w-full" />
-        <ParallaxImages />
+        <ParallaxImages images={images} />
         <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-16 pointer-events-none">
           <h1 className="text-4xl md:text-6xl font-bold text-white bg-black/60 px-8 py-4 rounded-2xl shadow-xl pointer-events-auto">
             {solutionTitle}
@@ -51,7 +85,7 @@ const Hero = ({ solutionTitle }) => {
   );
 };
 
-const CenterImage = () => {
+const CenterImage = ({ img }) => {
   const { scrollY } = useScroll();
   const clip1 = useTransform(scrollY, [0, 1500], [25, 0]);
   const clip2 = useTransform(scrollY, [0, 1500], [75, 100]);
@@ -76,39 +110,41 @@ const CenterImage = () => {
         backgroundSize,
         opacity,
       }}
-      src="https://images.unsplash.com/photo-1460186136353-977e9d6085a1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      src={img}
       alt="Solution background"
     />
   );
 };
 
-const ParallaxImages = () => {
+const ParallaxImages = ({ images }) => {
+  // Use up to 4 images for parallax, fallback if not enough
+  const fallback = "https://images.unsplash.com/photo-1460186136353-977e9d6085a1?q=80&w=2670&auto=format&fit=crop";
   return (
     <div className="mx-auto max-w-5xl px-4 pt-[200px]">
       <ParallaxImg
-        src="https://images.unsplash.com/photo-1484600899469-230e8d1d59c0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="And example of a space launch"
+        src={images[1] || fallback}
+        alt="Parallax 1"
         start={-200}
         end={200}
         className="w-1/3"
       />
       <ParallaxImg
-        src="https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="An example of a space launch"
+        src={images[2] || fallback}
+        alt="Parallax 2"
         start={200}
         end={-250}
         className="mx-auto w-2/3"
       />
       <ParallaxImg
-        src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Orbiting satellite"
+        src={images[3] || fallback}
+        alt="Parallax 3"
         start={-200}
         end={200}
         className="ml-auto w-1/3"
       />
       <ParallaxImg
-        src="https://images.unsplash.com/photo-1494022299300-899b96e49893?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Orbiting satellite"
+        src={images[4] || fallback}
+        alt="Parallax 4"
         start={0}
         end={-500}
         className="ml-24 w-5/12"

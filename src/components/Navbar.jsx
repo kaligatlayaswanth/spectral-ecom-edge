@@ -5,30 +5,38 @@ import { Link, useLocation } from "react-router-dom";
 export const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [solutionFlyout, setSolutionFlyout] = useState(null);
   const location = useLocation();
+
+  // Fetch solution stories for the Solutions dropdown
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/success-stories/")
+      .then((res) => res.json())
+      .then((data) => {
+        setSolutionFlyout(
+          data.map((story) => ({
+            label: story.title,
+            href: `/solution-details/${story.id}`,
+          }))
+        );
+      })
+      .catch(() => {
+        setSolutionFlyout([]);
+      });
+  }, []);
 
   // Dropdown data structure
   const navItems = [
     { label: "Home", href: "/" },
     {
       label: "Shop",
-      href: "/shop",
-      flyout: [
-        { label: "IoT Sensors", href: "#" },
-      ],
+      href: "/shop"
     },
     {
       label: "Solutions",
       href: "/solutions",
-      flyout: [
-        { label: "Smart Home", href: "/solution-details/smart-home" },
-        { label: "Video Surveillance", href: "/solution-details/video-surveillance" },
-        { label: "Smart Agriculture", href: "/solution-details/smart-agriculture" },
-        { label: "Smart Building", href: "/solution-details/smart-building" },
-        { label: "Smart City", href: "/solution-details/smart-city" },
-        { label: "Water Management", href: "/solution-details/water-management" },
-        { label: "Smart Restroom", href: "/solution-details/smart-restroom" },
-        { label: "Waste Management", href: "/solution-details/waste-management" },
+      flyout: solutionFlyout || [
+        { label: "Loading...", href: "#" },
       ],
     },
     {
@@ -82,7 +90,7 @@ export const Navbar = () => {
           className={`nav-links md:flex items-center gap-2 text-white font-medium transition-all duration-300 ${
             mobileOpen
               ? "fixed left-0 top-0 w-full h-full bg-black/90 flex flex-col pt-24 z-50"
-              : "hidden md:flex"
+              : "hidden md:flex justify-center flex-1"
           }`}
         >
           {navItems.map((item, idx) => (
@@ -130,23 +138,6 @@ export const Navbar = () => {
             </li>
           ))}
         </ul>
-        {/* Login and Cart buttons */}
-        <div className="hidden md:flex items-center space-x-4">
-          <Link
-            to="/auth"
-            className={`flex items-center gap-2 px-5 py-2 rounded-full border border-white/20 bg-white/10 text-white/80 hover:text-white hover:bg-white/20 hover:shadow-white/30 transition-all duration-300 font-semibold backdrop-blur-md group active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/40 ${location.pathname === "/auth" ? "text-white border-white/40" : ""}`}
-          >
-            <svg className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A9 9 0 1112 21a8.963 8.963 0 01-6.879-3.196z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            Login
-          </Link>
-          <Link
-            to="/cart"
-            className={`flex items-center gap-2 px-6 py-2 rounded-full bg-white/90 text-black font-bold shadow-lg hover:shadow-white/60 border border-white/30 hover:bg-white transition-all duration-300 group active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/40 ${location.pathname === "/cart" ? "ring-2 ring-white/60" : ""}`}
-          >
-            <svg className="w-5 h-5 text-black group-hover:text-gray-800 transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 5H16M16 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m12 0a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2a2 2 0 012-2h2z" /></svg>
-            Cart <span className="ml-1 font-semibold text-black/60 group-hover:text-black/80 transition-colors duration-300">(3)</span>
-          </Link>
-        </div>
       </div>
     </nav>
   );

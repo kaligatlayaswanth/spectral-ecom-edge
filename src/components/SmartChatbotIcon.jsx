@@ -126,14 +126,14 @@ const SmartChatbotIcon = () => {
             <div ref={messagesEndRef} />
           </div>
           <div className="mt-4 flex justify-center">
-            <input
+          <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleInputKeyDown}
-              placeholder="Type your message..."
+            placeholder="Type your message..."
               className="w-full p-2 rounded-lg bg-cyan-900/60 text-cyan-100 border border-cyan-400 focus:outline-none focus:border-cyan-600"
-            />
+          />
           </div>
         </div>
       )}
@@ -141,4 +141,4 @@ const SmartChatbotIcon = () => {
   );
 };
 
-export default SmartChatbotIcon;
+export default SmartChatbotIcon; 

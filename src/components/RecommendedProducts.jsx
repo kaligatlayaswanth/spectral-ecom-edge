@@ -1,38 +1,32 @@
-
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ProductCard } from "./ProductCard";
 
-const recommendedProducts = [
-  {
-    id: 2,
-    name: "Smart Fitness Tracker",
-    price: "$199",
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop&crop=center",
-    badge: "Trending"
-  },
-  {
-    id: 3,
-    name: "4K Action Camera",
-    price: "$449",
-    image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=400&fit=crop&crop=center",
-    badge: ""
-  },
-  {
-    id: 4,
-    name: "IoT Temperature Sensor",
-    price: "$89",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&crop=center",
-    badge: "New"
-  },
-  {
-    id: 5,
-    name: "Smart Home Hub",
-    price: "$179",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center",
-    badge: ""
-  }
-];
-
 export const RecommendedProducts = () => {
+  const [recommended, setRecommended] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/recommended-products/")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch recommended products");
+        return res.json();
+      })
+      .then((data) => {
+        setRecommended(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div className="text-white text-center py-10">Loading recommended products...</div>;
+  if (error) return <div className="text-red-500 text-center py-10">{error}</div>;
+
   return (
     <section className="py-20 bg-gradient-to-b from-black to-neutral-900">
       <div className="max-w-7xl mx-auto px-6">
@@ -47,17 +41,17 @@ export const RecommendedProducts = () => {
 
         <div className="relative">
           <div className="flex overflow-x-auto pb-6 scrollbar-hide gap-6" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {recommendedProducts.map((product, index) => (
+            {recommended.map((rec, index) => (
               <div
-                key={product.id}
-                className="flex-shrink-0 w-80 animate-fade-in"
+                key={rec.id}
+                className="flex-shrink-0 w-80 animate-fade-in cursor-pointer"
                 style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={() => navigate(`/product/${rec.product.id}`)}
               >
-                <ProductCard product={product} />
+                <ProductCard product={rec.product} />
               </div>
             ))}
           </div>
-          
           {/* Fade edges */}
           <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-neutral-900 to-transparent pointer-events-none"></div>
