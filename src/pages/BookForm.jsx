@@ -3,7 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useNavigate } from "react-router-dom";
 
-const WEBHOOK_URL = "https://kaliyaswanth.app.n8n.cloud/webhook-test/email";
+const WEBHOOK_URL = "https://kaliyaswanth.app.n8n.cloud/webhook/email";
 
 const BookForm = () => {
   const [form, setForm] = useState({ name: "", email: "", contact: "", location: "" });
