@@ -18,7 +18,7 @@ export const CategoriesSection = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/categories/")
+    fetch("https://backendec-g9oj.onrender.com/categories/")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch categories");
         return res.json();
@@ -52,24 +52,24 @@ export const CategoriesSection = () => {
           {categories.map((category, index) => {
             const Icon = iconMap[category.name] || Tag;
             return (
-              <div
+            <div
                 key={category.id}
-                className="group relative bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:scale-105 hover:bg-gradient-to-br hover:from-white/10 hover:to-white/5 transition-all duration-500 cursor-pointer animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+              className="group relative bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:scale-105 hover:bg-gradient-to-br hover:from-white/10 hover:to-white/5 transition-all duration-500 cursor-pointer animate-fade-in"
+              style={{ animationDelay: `${index * 100}ms` }}
                 onClick={() => navigate(`/shop?category=${category.id}`)}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10">
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
                   <Icon className="w-12 h-12 text-white mb-6 group-hover:scale-110 transition-transform duration-300" />
-                  <h3 className="text-2xl font-semibold font-poppins text-white mb-3">
-                    {category.name}
-                  </h3>
-                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                <h3 className="text-2xl font-semibold font-poppins text-white mb-3">
+                  {category.name}
+                </h3>
+                <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
                     {category.description || "Explore our products in this category."}
-                  </p>
-                </div>
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+                </p>
               </div>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+            </div>
             );
           })}
         </div>

@@ -9,7 +9,7 @@ export const RecommendedProducts = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/recommended-products/")
+    fetch("https://backendec-g9oj.onrender.com/recommended-products/")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch recommended products");
         return res.json();

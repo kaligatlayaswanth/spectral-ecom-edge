@@ -8,7 +8,7 @@ export const ProductsSection = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/recommended-products/")
+    fetch("https://backendec-g9oj.onrender.com/recommended-products/")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch recommended products");
         return res.json();
@@ -49,7 +49,7 @@ export const ProductsSection = () => {
               >
                 <div className="relative overflow-hidden rounded-xl mb-6">
                   <img
-                    src={rec.product.image && !rec.product.image.startsWith('http') ? `http://127.0.0.1:8000${rec.product.image}` : rec.product.image}
+                    src={rec.product.image && !rec.product.image.startsWith('http') ? `https://backendec-g9oj.onrender.com${rec.product.image}` : rec.product.image}
                     alt={rec.product.name}
                     className="w-full h-64 object-cover transition-all duration-500 group-hover:scale-110"
                   />

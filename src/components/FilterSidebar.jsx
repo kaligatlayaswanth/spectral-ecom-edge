@@ -12,7 +12,7 @@ export const FilterSidebar = () => {
   const selectedCategory = query.get("category");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/categories/")
+    fetch("https://backendec-g9oj.onrender.com/categories/")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch categories");
         return res.json();

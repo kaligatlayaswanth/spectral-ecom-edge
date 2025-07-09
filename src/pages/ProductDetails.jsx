@@ -12,7 +12,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/products/${id}/`)
+    fetch(`https://backendec-g9oj.onrender.com/products/${id}/`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch product details");
         return res.json();
@@ -33,7 +33,7 @@ const ProductDetails = () => {
 
   let imageUrl = product.image;
   if (imageUrl && !imageUrl.startsWith("http")) {
-    imageUrl = `http://127.0.0.1:8000${imageUrl}`;
+    imageUrl = `https://backendec-g9oj.onrender.com${imageUrl}`;
   }
 
   return (

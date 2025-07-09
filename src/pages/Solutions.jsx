@@ -40,7 +40,7 @@ const LinkItem = ({ story }) => {
   };
   let imageUrl = story.image_1;
   if (imageUrl && !imageUrl.startsWith("http")) {
-    imageUrl = `http://127.0.0.1:8000${imageUrl}`;
+    imageUrl = `https://backendec-g9oj.onrender.com${imageUrl}`;
   }
   return (
     <motion.div
@@ -124,7 +124,7 @@ const Solutions = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/success-stories/")
+    fetch("https://backendec-g9oj.onrender.com/success-stories/")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch stories");
         return res.json();

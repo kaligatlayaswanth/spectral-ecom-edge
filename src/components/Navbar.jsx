@@ -10,7 +10,7 @@ export const Navbar = () => {
 
   // Fetch solution stories for the Solutions dropdown
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/success-stories/")
+    fetch("https://backendec-g9oj.onrender.com/success-stories/")
       .then((res) => res.json())
       .then((data) => {
         setSolutionFlyout(

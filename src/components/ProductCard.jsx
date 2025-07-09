@@ -5,7 +5,7 @@ export const ProductCard = ({ product }) => {
   // Handle image URL (prepend backend host if needed)
   let imageUrl = product.image;
   if (imageUrl && !imageUrl.startsWith("http")) {
-    imageUrl = `http://127.0.0.1:8000${imageUrl}`;
+    imageUrl = `https://backendec-g9oj.onrender.com${imageUrl}`;
   }
   // Fallback image
   const fallbackImage = "/placeholder.svg";

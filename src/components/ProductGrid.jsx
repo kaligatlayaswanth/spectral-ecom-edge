@@ -18,7 +18,7 @@ export const ProductGrid = () => {
   const categoryId = query.get("category");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/products/")
+    fetch("https://backendec-g9oj.onrender.com/products/")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch products");
         return res.json();
