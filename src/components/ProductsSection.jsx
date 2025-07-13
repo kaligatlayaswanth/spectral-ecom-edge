@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getImageUrl } from "../utils/imageUtils";
 
 export const ProductsSection = () => {
   const [products, setProducts] = useState([]);
@@ -49,7 +50,7 @@ export const ProductsSection = () => {
               >
                 <div className="relative overflow-hidden rounded-xl mb-6">
                   <img
-                    src={rec.product.image && !rec.product.image.startsWith('http') ? `https://backendec-g9oj.onrender.com${rec.product.image}` : rec.product.image}
+                    src={getImageUrl(rec.product.image)}
                     alt={rec.product.name}
                     className="w-full h-64 object-cover transition-all duration-500 group-hover:scale-110"
                   />

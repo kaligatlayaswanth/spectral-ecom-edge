@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { useParams } from "react-router-dom";
+import { getImageUrl } from "../utils/imageUtils";
 
 const SECTION_HEIGHT = 1500;
 
@@ -42,7 +43,7 @@ const SolutionDetails = () => {
   // Prepare image URLs
   const images = [solutionData.image_1, solutionData.image_2, solutionData.image_3, solutionData.image_4, solutionData.image_5]
     .filter(Boolean)
-            .map(img => img && !img.startsWith("http") ? `https://backendec-g9oj.onrender.com${img}` : img);
+    .map(img => getImageUrl(img));
 
   // Fallbacks for parallax if not enough images
   const fallback = "https://images.unsplash.com/photo-1460186136353-977e9d6085a1?q=80&w=2670&auto=format&fit=crop";

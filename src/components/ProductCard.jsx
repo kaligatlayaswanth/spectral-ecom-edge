@@ -1,15 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { getImageUrl, FALLBACK_IMAGE } from "../utils/imageUtils";
 
 export const ProductCard = ({ product }) => {
-  // Handle image URL (prepend backend host if needed)
-  let imageUrl = product.image;
-  if (imageUrl && !imageUrl.startsWith("http")) {
-    imageUrl = `https://backendec-g9oj.onrender.com${imageUrl}`;
-  }
-  // Fallback image
-  const fallbackImage = "/placeholder.svg";
-  const [imgSrc, setImgSrc] = useState(imageUrl || fallbackImage);
+  // Handle image URL using the utility function
+  const imageUrl = getImageUrl(product.image);
+  const [imgSrc, setImgSrc] = useState(imageUrl || FALLBACK_IMAGE);
   const navigate = useNavigate();
 
   return (
@@ -30,7 +26,7 @@ export const ProductCard = ({ product }) => {
           src={imgSrc}
           alt={product.name}
           className="w-full h-full object-contain drop-shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:drop-shadow-2xl bg-white"
-          onError={() => setImgSrc(fallbackImage)}
+          onError={() => setImgSrc(FALLBACK_IMAGE)}
         />
       </div>
 
