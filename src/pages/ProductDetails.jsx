@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ArrowLeft, ChevronRight } from "lucide-react";
+import { getImageUrl } from "@/utils/imageUtils";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -31,10 +32,7 @@ const ProductDetails = () => {
   if (error) return <div className="text-red-500 text-center py-10">{error}</div>;
   if (!product) return null;
 
-  let imageUrl = product.image;
-  if (imageUrl && !imageUrl.startsWith("http")) {
-    imageUrl = `https://backendec-g9oj.onrender.com${imageUrl}`;
-  }
+  const imageUrl = getImageUrl(product.image);
 
   return (
     <div className="min-h-screen bg-white font-inter">

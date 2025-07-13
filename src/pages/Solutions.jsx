@@ -5,6 +5,7 @@ import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { getImageUrl } from "../utils/imageUtils";
 
 const HoverImageLinks = ({ stories }) => {
   return (
@@ -38,10 +39,7 @@ const LinkItem = ({ story }) => {
     x.set(xPct);
     y.set(yPct);
   };
-  let imageUrl = story.image_1;
-  if (imageUrl && !imageUrl.startsWith("http")) {
-    imageUrl = `https://backendec-g9oj.onrender.com${imageUrl}`;
-  }
+  const imageUrl = getImageUrl(story.image_1);
   return (
     <motion.div
       ref={ref}
